@@ -1,0 +1,329 @@
+/* =========================================================
+   NovaCart — Animation Layer Only
+   UI/layout/colors are intentionally untouched.
+   ========================================================= */
+
+:root {
+  --nc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --nc-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Initial page entrance */
+body.nc-page-ready {
+  animation: ncPageIn 0.65s var(--nc-ease) both;
+}
+
+@keyframes ncPageIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Header entrance */
+.site-header {
+  animation: ncHeaderIn 0.75s var(--nc-ease) 0.05s both;
+}
+
+@keyframes ncHeaderIn {
+  from { opacity: 0; transform: translateY(-18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero entrance */
+.hero-content {
+  animation: ncHeroText 0.9s var(--nc-ease) 0.12s both;
+}
+
+.hero-visual {
+  animation: ncHeroVisual 1s var(--nc-ease) 0.2s both;
+}
+
+@keyframes ncHeroText {
+  from { opacity: 0; transform: translateX(-36px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ncHeroVisual {
+  from { opacity: 0; transform: translateX(36px) scale(.97); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.hero-glow {
+  animation: ncGlowFloat 5s ease-in-out infinite;
+}
+
+@keyframes ncGlowFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+
+/* Hero floating cards */
+.floating-card {
+  animation: ncFloatingCard 4.5s ease-in-out infinite;
+}
+
+.floating-bottom {
+  animation-delay: -1.8s;
+}
+
+@keyframes ncFloatingCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Scroll reveal — JS adds .nc-visible */
+.nc-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .75s ease, transform .8s var(--nc-ease);
+  will-change: opacity, transform;
+}
+
+.nc-reveal.nc-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nc-reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity .75s ease, transform .8s var(--nc-ease);
+}
+
+.nc-reveal-left.nc-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nc-reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity .75s ease, transform .8s var(--nc-ease);
+}
+
+.nc-reveal-right.nc-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Section headings */
+.section-head,
+.sale-header {
+  transition: opacity .75s ease, transform .8s var(--nc-ease);
+}
+
+.nc-section-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.nc-section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Category cards — animation only, existing design remains */
+.category-card {
+  transition: transform .45s var(--nc-ease), box-shadow .45s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-7px);
+}
+
+.category-img {
+  overflow: hidden;
+}
+
+.category-img img {
+  transition: transform .65s var(--nc-ease);
+}
+
+.category-card:hover .category-img img {
+  transform: scale(1.055);
+}
+
+/* Product cards */
+.product-card {
+  transition: transform .45s var(--nc-ease), box-shadow .45s ease;
+  will-change: transform;
+}
+
+.product-card:hover {
+  transform: translateY(-7px);
+}
+
+.product-card img {
+  transition: transform .65s var(--nc-ease);
+}
+
+.product-card:hover img {
+  transform: scale(1.045);
+}
+
+/* Product cards generated dynamically get a gentle stagger */
+.nc-stagger > * {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: ncStaggerIn .55s var(--nc-ease) forwards;
+}
+
+.nc-stagger > *:nth-child(1) { animation-delay: .03s; }
+.nc-stagger > *:nth-child(2) { animation-delay: .07s; }
+.nc-stagger > *:nth-child(3) { animation-delay: .11s; }
+.nc-stagger > *:nth-child(4) { animation-delay: .15s; }
+.nc-stagger > *:nth-child(5) { animation-delay: .19s; }
+.nc-stagger > *:nth-child(6) { animation-delay: .23s; }
+
+@keyframes ncStaggerIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons / links — subtle, no size/layout changes */
+.btn-primary-custom,
+.btn-secondary-custom,
+.outline-btn,
+.text-link,
+.filter-chip,
+.icon-btn,
+.mobile-menu-btn {
+  transition: transform .28s var(--nc-ease), opacity .28s ease;
+}
+
+.btn-primary-custom:hover,
+.btn-secondary-custom:hover,
+.outline-btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary-custom:active,
+.btn-secondary-custom:active,
+.outline-btn:active,
+.icon-btn:active,
+.mobile-menu-btn:active {
+  transform: scale(.96);
+}
+
+/* Search / filter interactions */
+.filter-chip:hover {
+  transform: translateY(-1px);
+}
+
+.sort-wrap select,
+.shop-toolbar,
+.search-box,
+.newsletter-form input {
+  transition: box-shadow .3s ease, transform .3s var(--nc-ease);
+}
+
+.sort-wrap select:focus,
+.newsletter-form input:focus {
+  transform: translateY(-1px);
+}
+
+/* Wishlist / cart count pop when JS changes the number */
+.nav-count.nc-pop {
+  animation: ncCountPop .42s var(--nc-spring);
+}
+
+@keyframes ncCountPop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.28); }
+  75% { transform: scale(.9); }
+  100% { transform: scale(1); }
+}
+
+/* Cart / wishlist drawer */
+.side-drawer.open {
+  animation: ncDrawerIn .5s var(--nc-ease) both;
+}
+
+@keyframes ncDrawerIn {
+  from { opacity: .65; transform: translateX(28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Drawer items */
+.drawer-item {
+  animation: ncItemIn .45s var(--nc-ease) both;
+}
+
+@keyframes ncItemIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Modal */
+.modal.show .modal-dialog {
+  animation: ncModalIn .5s var(--nc-ease) both;
+}
+
+@keyframes ncModalIn {
+  from { opacity: 0; transform: translateY(18px) scale(.975); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Promo image */
+.promo-image img {
+  transition: transform .8s var(--nc-ease);
+}
+
+.promo-card:hover .promo-image img {
+  transform: scale(1.035);
+}
+
+/* Testimonials / cards if present */
+.testimonial-card,
+.review-card,
+.feature-card {
+  transition: transform .45s var(--nc-ease), box-shadow .45s ease;
+}
+
+.testimonial-card:hover,
+.review-card:hover,
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Back to top */
+#backTop {
+  transition: opacity .3s ease, transform .35s var(--nc-spring);
+}
+
+#backTop.show {
+  animation: ncBackTopIn .4s var(--nc-spring) both;
+}
+
+@keyframes ncBackTopIn {
+  from { opacity: 0; transform: translateY(12px) scale(.85); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Mobile menu */
+.mobile-menu.open {
+  animation: ncMobileMenuIn .42s var(--nc-ease) both;
+}
+
+@keyframes ncMobileMenuIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast if present */
+.toast.show {
+  animation: ncToastIn .45s var(--nc-spring) both;
+}
+
+@keyframes ncToastIn {
+  from { opacity: 0; transform: translateY(12px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
